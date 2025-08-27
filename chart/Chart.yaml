@@ -1,0 +1,6 @@
+apiVersion: v2
+name: reporting-etl
+description: Consumidor de payments.completed que carga fact_payments y daily_volume en el warehouse.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

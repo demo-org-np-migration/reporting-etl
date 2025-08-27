@@ -1,0 +1,46 @@
+# Defaults sanos de staging. Los values reales por entorno viven en el repo
+# gitops (apps/reporting-etl/values-<env>.yaml); Argo CD los aplica sobre este
+# chart. No versionamos values-<env>.yaml acá (las convenciones internas de API §9, estilo C).
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/demo-org-np-migration/reporting-etl
+  tag: latest
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  create: false
+  name: ""
+
+service:
+  port: 8080
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+
+env:
+  SERVICE_NAME: reporting-etl
+  ENV: staging
+  PORT: "8080"
+  LOG_LEVEL: INFO
+  KAFKA_BOOTSTRAP: kafka.platform.svc:9092
+  KAFKA_TOPIC_PREFIX: "staging."
+  DB_HOST: postgres.staging.svc
+  DB_NAME: warehouse
+
+postgresSecretName: postgres-credentials
+
+serviceMonitor:
+  enabled: true
+  interval: 30s
+  path: /metrics
+
+probes:
+  path: /health
+  port: 8080
