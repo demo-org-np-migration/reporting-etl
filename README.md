@@ -11,7 +11,7 @@ Este repo nació en el equipo de payments, como un script que Tomás escribía a
 vez que finanzas pedía un número de volumen. Cuando empezamos a necesitar el dato al día
 (y no una corrida manual cada tanto) lo convertimos en un consumidor de Kafka de verdad, y
 cuando Tomás no daba abasto con el resto de payments-api lo heredó platform. Yo (Paula) soy
-la owner desde entonces; Marcos ayuda con el chart y los workflows.
+la owner desde entonces; Martín Acosta ayuda con el chart y los workflows.
 
 Es chiquito a propósito: una tabla de hechos y un acumulado diario, nada de agregaciones
 pesadas ni de un data warehouse de verdad detrás. Si en algún momento necesitamos más
