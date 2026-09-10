@@ -65,8 +65,10 @@ jobs:
           git config user.email "reporting-etl-bot@cauri.io"
           git add apps/reporting-etl/values-staging.yaml
           git commit -m "reporting-etl: bump staging image to ${{ needs.build-and-push.outputs.tag }}"
-          git push
-
+          for _ in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then break; fi
+            sleep $((RANDOM % 5 + 2))
+          done
   update-gitops-prod:
     needs: build-and-push
     if: startsWith(github.ref, 'refs/tags/v')
@@ -94,4 +96,7 @@ jobs:
           git config user.email "reporting-etl-bot@cauri.io"
           git add apps/reporting-etl/values-prod.yaml
           git commit -m "reporting-etl: bump prod image to ${{ needs.build-and-push.outputs.tag }}"
-          git push
+          for _ in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then break; fi
+            sleep $((RANDOM % 5 + 2))
+          done
